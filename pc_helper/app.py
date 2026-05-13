@@ -168,7 +168,3 @@ def theory():
 @app.template_filter('min_format')
 def min_format(value):
     return "{:,}".format(value).replace(",", " ")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
