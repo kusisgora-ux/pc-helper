@@ -3,6 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
+app.debug = True
 show_smart = False
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "pc_helper.db")
