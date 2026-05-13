@@ -1,8 +1,11 @@
 from flask import Flask, render_template
 import sqlite3
+import os
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 show_smart = False
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "pc_helper.db")
 
 # =========================
 # 💻 ГОТОВЫЕ СБОРКИ (БЕЗ ССЫЛОК)
@@ -65,10 +68,10 @@ BUILDS_DATA = [
 # =========================
 
 def get_db():
-    conn = sqlite3.connect("pc_helper.db")
+    # Теперь путь всегда будет правильным, где бы ни запустился код
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
-
 
 # =========================
 # ROUTES
