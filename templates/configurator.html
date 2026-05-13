@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="section-title">Конфигуратор</h1>
+
+<div class="config-box">
+    <div class="cards">
+        <div class="card collapsed">
+            <h2 onclick="this.parentElement.classList.toggle('collapsed')">Процессоры</h2>
+            <div class="card-content">
+                {% for item in cpus %}
+                <div class="part" data-type="cpu" data-name="{{ item.name }}" data-price="{{ item.price }}" data-socket="{{ item.socket }}" data-watt="{{ item.tdp }}" data-url="{{ item.url }}">
+                    {{ item.name }} — {{ item.price }}₽
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card collapsed">
+            <h2 onclick="this.parentElement.classList.toggle('collapsed')">Видеокарты</h2>
+            <div class="card-content">
+                {% for item in gpus %}
+                <div class="part" data-type="gpu" data-name="{{ item.name }}" data-price="{{ item.price }}" data-watt="{{ item.power }}" data-url="{{ item.url }}">
+                    {{ item.name }} — {{ item.price }}₽
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card collapsed">
+    <h2 onclick="this.parentElement.classList.toggle('collapsed')">Оперативная память</h2>
+    <div class="card-content">
+        {% for item in ram %}
+        <div class="part"
+             data-type="ram"
+             data-name="{{ item.name }}"
+             data-price="{{ item.price }}"
+             data-ddr="{{ item.type }}"
+             data-url="{{ item.url }}">
+            {{ item.name }} ({{ item.type }}) — {{ item.price }}₽
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card collapsed">
+    <h2 onclick="this.parentElement.classList.toggle('collapsed')">Мат. платы</h2>
+    <div class="card-content">
+        {% for item in motherboards %}
+        <div class="part"
+             data-type="mb"
+             data-name="{{ item.name }}"
+             data-price="{{ item.price }}"
+             data-socket="{{ item.socket }}"
+             data-ddr="{{ item.ram_type }}"
+             data-url="{{ item.url }}">
+            {{ item.name }} ({{ item.socket }}, {{ item.ram_type }}) — {{ item.price }}₽
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+        <div class="card collapsed">
+            <h2 onclick="this.parentElement.classList.toggle('collapsed')">SSD</h2>
+            <div class="card-content">
+                {% for item in ssd %}
+                <div class="part" data-type="ssd" data-name="{{ item.name }}" data-price="{{ item.price }}" data-url="{{ item.url }}">
+                    {{ item.name }} — {{ item.price }}₽
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card collapsed">
+            <h2 onclick="this.parentElement.classList.toggle('collapsed')">Блок питания</h2>
+            <div class="card-content">
+                {% for item in psu %}
+                <div class="part" data-type="psu" data-name="{{ item.name }}" data-price="{{ item.price }}" data-watt="{{ item.power }}" data-url="{{ item.url }}">
+                    {{ item.name }} ({{ item.power }}W) — {{ item.price }}₽
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card collapsed">
+            <h2 onclick="this.parentElement.classList.toggle('collapsed')">Кулер</h2>
+            <div class="card-content">
+                {% for item in coolers %}
+                <div class="part" data-type="cooler" data-name="{{ item.name }}" data-price="{{ item.price }}" data-socket="{{ item.socket }}" data-url="{{ item.url }}">
+                    {{ item.name }} — {{ item.price }}₽
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card collapsed">
+            <h2 onclick="this.parentElement.classList.toggle('collapsed')">Корпус</h2>
+            <div class="card-content">
+                {% for item in cases %}
+                <div class="part" data-type="case" data-name="{{ item.name }}" data-price="{{ item.price }}" data-url="{{ item.url }}">
+                    {{ item.name }} — {{ item.price }}₽
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="build-panel">
+        <h2>Твоя сборка</h2>
+        <p>CPU: <span id="sel-cpu">не выбрано</span></p>
+        <p>GPU: <span id="sel-gpu">не выбрано</span></p>
+        <p>MB: <span id="sel-mb">не выбрано</span></p>
+        <p>RAM: <span id="sel-ram">не выбрано</span></p>
+        <p>SSD: <span id="sel-ssd">не выбрано</span></p>
+        <p>PSU: <span id="sel-psu">не выбрано</span></p>
+        <p>COOLER: <span id="sel-cooler">не выбрано</span></p>
+        <p>CASE: <span id="sel-case">не выбрано</span></p>
+        <hr>
+        <p><b>Итого:</b> <span id="total-price">0 ₽</span></p>
+        <div id="warn" style="padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px;">Совместимость: ❓</div>
+        <p class="price-note">
+            ⚠ Цены комплектующих могут меняться со временем.
+        </p>
+    </div>
+</div>
+{% endblock %}

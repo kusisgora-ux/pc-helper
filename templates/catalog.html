@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="section-title">Каталог комплектующих</h1>
+
+<div class="catalog-buttons">
+    <button class="active" onclick="showCategory('cpu')">Процессоры</button>
+    <button onclick="showCategory('gpu')">Видеокарты</button>
+    <button onclick="showCategory('ram')">Оперативная память</button>
+    <button onclick="showCategory('mb')">Материнские платы</button>
+    <button onclick="showCategory('psu')">Блоки питания</button>
+    <button onclick="showCategory('ssd')">SSD</button>
+    <button onclick="showCategory('cooler')">Кулеры</button>
+    <button onclick="showCategory('case')">Корпуса</button>
+</div>
+
+<div id="cpu" class="catalog-section">
+    <h2>Процессоры</h2>
+    <div class="cards">
+        {% for cpu in cpus %}
+        <div class="card">
+            <h3>{{ cpu.name }}</h3>
+            <div class="specs">
+                <p><b>Сокет:</b> {{ cpu.socket }}</p>
+                <p><b>Ядра/Потоки:</b> {{ cpu.cores }}/{{ cpu.threads }}</p>
+                <p><b>Частота:</b> {{ cpu.freq }} ГГц</p>
+            </div>
+            <p class="price">{{ cpu.price }} ₽</p>
+            <a href="{{ cpu.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="gpu" class="catalog-section hidden">
+    <h2>Видеокарты</h2>
+    <div class="cards">
+        {% for gpu in gpus %}
+        <div class="card">
+            <h3>{{ gpu.name }}</h3>
+            <div class="specs">
+                <p><b>Память:</b> {{ gpu.memory }} ГБ</p>
+                <p><b>Потребление:</b> {{ gpu.power }} Вт</p>
+            </div>
+            <p class="price">{{ gpu.price }} ₽</p>
+            <a href="{{ gpu.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="ram" class="catalog-section hidden">
+    <h2>Оперативная память</h2>
+    <div class="cards">
+        {% for item in ram %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <div class="specs">
+                <p><b>Объем:</b> {{ item.size }} ГБ</p>
+                <p><b>Частота:</b> {{ item.freq }} МГц</p>
+                <p><b>Тип:</b> {{ item.type }}</p>
+            </div>
+            <p class="price">{{ item.price }} ₽</p>
+            <a href="{{ item.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="mb" class="catalog-section hidden">
+    <h2>Материнские платы</h2>
+    <div class="cards">
+        {% for item in motherboards %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <div class="specs">
+                <p><b>Сокет:</b> {{ item.socket }}</p>
+                <p><b>Чипсет:</b> {{ item.chipset }}</p>
+                <p><b>Формат:</b> {{ item.form_factor }}</p>
+            </div>
+            <p class="price">{{ item.price }} ₽</p>
+            <a href="{{ item.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="psu" class="catalog-section hidden">
+    <h2>Блоки питания</h2>
+    <div class="cards">
+        {% for item in psu %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <div class="specs">
+                <p><b>Мощность:</b> {{ item.power }} Вт</p>
+                <p><b>Сертификат:</b> {{ item.certificate }}</p>
+            </div>
+            <p class="price">{{ item.price }} ₽</p>
+            <a href="{{ item.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="ssd" class="catalog-section hidden">
+    <h2>Накопители</h2>
+    <div class="cards">
+        {% for item in ssd %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <div class="specs">
+                <p><b>Объем:</b> {{ item.size }} ГБ</p>
+                <p><b>Тип:</b> {{ item.type }}</p>
+            </div>
+            <p class="price">{{ item.price }} ₽</p>
+            <a href="{{ item.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="cooler" class="catalog-section hidden">
+    <h2>Охлаждение</h2>
+    <div class="cards">
+        {% for item in coolers %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <div class="specs">
+                <p><b>TDP:</b> {{ item.tdp }} Вт</p>
+            </div>
+            <p class="price">{{ item.price }} ₽</p>
+            <a href="{{ item.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="case" class="catalog-section hidden">
+    <h2>Корпуса</h2>
+    <div class="cards">
+        {% for item in cases %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <div class="specs">
+                <p><b>Формат:</b> {{ item.form_factor }}</p>
+                <p><b>Видеокарта до:</b> {{ item.max_gpu }} мм</p>
+            </div>
+            <p class="price">{{ item.price }} ₽</p>
+            <a href="{{ item.url }}" target="_blank" class="buy-button">Купить в DNS</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+function showCategory(id) {
+    // Скрываем все секции
+    document.querySelectorAll('.catalog-section').forEach(el => el.classList.add('hidden'));
+    // Убираем активный класс у кнопок
+    document.querySelectorAll('.catalog-buttons button').forEach(btn => btn.classList.remove('active'));
+
+    // Показываем нужную
+    document.getElementById(id).classList.remove('hidden');
+    // Добавляем активный класс нажатой кнопке
+    event.currentTarget.classList.add('active');
+}
+</script>
+
+<style>
+    .hidden { display: none; }
+    .catalog-section { padding: 20px 0; }
+    .specs p { margin: 5px 0; font-size: 0.9rem; color: #ccc; }
+    .price { font-size: 1.2rem; font-weight: bold; color: #ff00ff; margin-top: 10px; }
+</style>
+
+{% endblock %}
